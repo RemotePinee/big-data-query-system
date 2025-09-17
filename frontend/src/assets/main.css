@@ -1,0 +1,615 @@
+/* 引入现代UI设计系统 */
+@import './modern-ui.css';
+@import './admin-theme.css';
+@import './mobile-ui.css';
+@import './mobile-modern-ui.css';
+
+/* Element Plus 变量覆盖 - 设置默认对话框样式 */
+:root {
+  --el-border-radius-base: 8px !important;
+}
+
+/* 用户端登录弹窗样式 - 30vh位置 - 最强优先级 */
+.login-dialog-custom {
+  margin-top: 30vh !important;
+}
+
+.login-dialog-custom.el-dialog {
+  margin-top: 30vh !important;
+}
+
+.el-overlay .login-dialog-custom.el-dialog {
+  margin-top: 30vh !important;
+}
+
+body .el-overlay .login-dialog-custom.el-dialog {
+  margin-top: 30vh !important;
+}
+
+html body .el-overlay .login-dialog-custom.el-dialog {
+  margin-top: 30vh !important;
+}
+
+.login-dialog-custom[class*="el-dialog"] {
+  margin-top: 30vh !important;
+}
+
+.el-overlay .login-dialog-custom[class*="el-dialog"] {
+  margin-top: 30vh !important;
+}
+
+body .el-overlay .login-dialog-custom[class*="el-dialog"] {
+  margin-top: 30vh !important;
+}
+
+/* 后台管理编辑弹框样式 - 位置更靠上，避免被导航栏遮住 */
+.admin-edit-dialog {
+  margin-top: 120px !important;
+}
+
+.admin-edit-dialog.el-dialog {
+  margin-top: 120px !important;
+}
+
+/* 更高优先级的后台管理弹框样式 */
+.el-overlay .admin-edit-dialog.el-dialog {
+  margin-top: 120px !important;
+}
+
+body .admin-edit-dialog.el-dialog {
+  margin-top: 120px !important;
+}
+
+body .el-overlay .admin-edit-dialog.el-dialog {
+  margin-top: 120px !important;
+}
+
+/* 最强优先级 - 直接覆盖所有后台管理弹框 */
+.admin-edit-dialog[class*="el-dialog"] {
+  margin-top: 120px !important;
+}
+
+.el-overlay .admin-edit-dialog[class*="el-dialog"] {
+  margin-top: 120px !important;
+}
+
+body .el-overlay .admin-edit-dialog[class*="el-dialog"] {
+  margin-top: 120px !important;
+}
+
+html body .el-overlay .admin-edit-dialog.el-dialog {
+  margin-top: 120px !important;
+}
+
+/* 全局弹窗样式已删除，让各组件自定义弹框位置 */
+
+/* 防止弹窗导致布局偏移 - 保持滚动条位置 */
+html {
+  overflow-y: scroll !important;
+  scrollbar-gutter: stable;
+}
+
+body {
+  scrollbar-gutter: stable;
+  overflow-y: scroll !important;
+}
+
+/* 强制覆盖Element Plus弹窗的body样式修改 */
+body.el-popup-parent--hidden {
+  padding-right: 0 !important;
+  overflow-y: scroll !important;
+  width: 100% !important;
+}
+
+/* 确保弹窗遮罩层不影响滚动条 */
+.el-overlay {
+  overflow-y: scroll !important;
+}
+
+/* 自定义滚动条样式 */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e8e8e8;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888888;
+  border-radius: 6px;
+  border: 2px solid #e8e8e8;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555555;
+}
+
+/* 确保样式正确应用 */
+:root {
+  --primary: #000000;
+  --primary-light: #818cf8;
+  --primary-dark: #3730a3;
+  --secondary: #10b981;
+  --secondary-light: #34d399;
+  --secondary-dark: #059669;
+  --accent: #f97316;
+  --accent-light: #fb923c;
+  --accent-dark: #ea580c;
+  
+  --gray-50: #fafafa;
+  --gray-100: #f4f4f5;
+  --gray-200: #e4e4e7;
+  --gray-300: #d4d4d8;
+  --gray-400: #a1a1aa;
+  --gray-500: #71717a;
+  --gray-600: #52525b;
+  --gray-700: #3f3f46;
+  --gray-800: #27272a;
+  --gray-900: #18181b;
+  
+  --success: #22c55e;
+  --warning: #eab308;
+  --error: #ef4444;
+  --info: #3b82f6;
+  
+  --bg-light: #ffffff;
+  --bg-light-alt: #f9fafb;
+  --bg-dark: #111827;
+  --bg-dark-alt: #1f2937;
+  
+  --text-primary: #18181b;
+  --text-secondary: #52525b;
+  --text-tertiary: #a1a1aa;
+  --text-light: #ffffff;
+  --text-light-secondary: rgba(255, 255, 255, 0.7);
+  
+  --border-light: #e4e4e7;
+  --border-dark: #3f3f46;
+  
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.06), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.07), 0 10px 10px -5px rgba(0, 0, 0, 0.03);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+  
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+  
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  
+  --transition-fast: 150ms;
+  --transition-normal: 300ms;
+  --transition-slow: 500ms;
+  
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg-dark: rgba(23, 23, 23, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border-dark: rgba(255, 255, 255, 0.05);
+  --glass-blur: 12px;
+}
+
+/* 防止白屏 */
+body {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* 确保所有页面都能正确加载样式 */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 确保所有元素都能正确继承变量 */
+* {
+  box-sizing: border-box !important;
+}
+#app {
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+/* 移动端适配 */
+.mobile .modern-navbar {
+  margin: 0 !important;
+  border-radius: 0 !important;
+  padding: 10px 15px !important;
+  background-color: #fff !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) !important;
+  position: fixed !important;
+  width: 100% !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 1000 !important;
+  height: 60px !important;
+}
+
+/* 为移动端导航腾出空间 */
+.mobile .modern-container {
+  padding-top: 70px !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+/* 移动端卡片样式调整 */
+.mobile .modern-card {
+  border-radius: 8px !important;
+  padding: 15px !important;
+  margin-bottom: 15px !important;
+}
+
+/* 移动端按钮样式调整 */
+.mobile .modern-btn {
+  width: 100% !important;
+  margin-bottom: 10px !important;
+}
+
+/* 移动端标题样式调整 */
+.mobile .hero-title {
+  font-size: 24px !important;
+  line-height: 1.3 !important;
+}
+
+.mobile .section-title {
+  font-size: 20px !important;
+  margin-bottom: 15px !important;
+}
+
+/* 移动端网格布局调整 */
+.mobile .services-grid,
+.mobile .advantages-grid,
+.mobile .stats-grid {
+  grid-template-columns: 1fr !important;
+  gap: 15px !important;
+}
+
+/* 移动端页脚调整 */
+.mobile .footer-content {
+  flex-direction: column !important;
+  text-align: center !important;
+}
+
+.mobile .footer-links {
+  flex-direction: column !important;
+  gap: 20px !important;
+  margin-top: 20px !important;
+}
+
+.mobile .footer-bottom {
+  flex-direction: column !important;
+  gap: 15px !important;
+}
+
+.mobile .modern-container {
+  padding: 10px;
+}
+
+.mobile .hero-section {
+  padding: 20px 0;
+  min-height: auto;
+}
+
+.mobile .hero-title {
+  font-size: 1.8rem;
+}
+
+.mobile .hero-description {
+  font-size: 1rem;
+}
+
+.mobile .hero-actions {
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobile .hero-image {
+  height: 200px;
+}
+
+.mobile .modern-card {
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.mobile .section-title {
+  font-size: 1.5rem;
+}
+
+.mobile .login-container {
+  padding: 10px;
+}
+
+.mobile .login-features {
+  display: none;
+}
+
+.mobile .query-title {
+  font-size: 1.5rem;
+}
+
+.mobile .process-steps {
+  flex-direction: column;
+}
+
+.mobile .process-arrow {
+  transform: rotate(90deg);
+  margin: 10px 0;
+}
+
+/* 确保移动端导航栏在底部有足够的空间 */
+.mobile .modern-footer {
+  padding-bottom: 70px;
+}
+
+/* 全局样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 移除所有按钮和可点击元素的focus outline */
+button,
+.el-button,
+.modern-btn,
+.mobile-modern-btn,
+.dock-item,
+a,
+input,
+select,
+textarea,
+[tabindex] {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* 移除移动端点击高亮 */
+* {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+/* 允许文本选择的元素 */
+input,
+textarea,
+.el-input__inner,
+.el-textarea__inner,
+p,
+span,
+div[contenteditable] {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+}
+
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important; /* 动态视口高度，解决地址栏问题 */
+  overflow-x: hidden !important;
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #333;
+  background-color: #f5f7fa;
+  position: relative !important;
+}
+
+#app {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important; /* 动态视口高度，解决地址栏问题 */
+  overflow-x: hidden !important;
+  background: transparent;
+  position: relative !important;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* 常用辅助类 */
+.container {
+  padding: 15px;
+  max-width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+/* 现代卡片样式 */
+.modern-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modern-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 16px 48px rgba(0, 0, 0, 0.15),
+    0 8px 24px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* 渐变按钮 */
+.gradient-button {
+  background: #000000;
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  padding: 12px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.gradient-button:hover {
+  background: #333333;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.gradient-button:active {
+  transform: translateY(0);
+}
+
+/* 主题色 */
+:root {
+  --primary-gradient: #000000;
+  --secondary-gradient: #c0faa0;
+  --success-gradient: #c0faa0;
+  --warning-gradient: #c0faa0;
+  --danger-gradient: #000000;
+  --info-gradient: #c0faa0;
+  
+  --primary-color: #667eea;
+  --secondary-color: #f093fb;
+  --success-color: #4facfe;
+  --warning-color: #43e97b;
+  --danger-color: #fa709a;
+  --info-color: #a8edea;
+  
+  --text-primary: #2d3748;
+  --text-secondary: #4a5568;
+  --text-muted: #718096;
+  
+  --bg-glass: rgba(255, 255, 255, 0.95);
+  --bg-glass-dark: rgba(255, 255, 255, 0.1);
+  
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.2);
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}

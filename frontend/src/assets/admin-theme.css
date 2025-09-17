@@ -1,0 +1,488 @@
+/* 后台管理主题样式 - 自定义色调搭配 */
+:root {
+  /* 主色调 - 深紫色 */
+  --admin-primary: #161326;
+  --admin-primary-light: #2a2440;
+  --admin-primary-dark: #0d0a1a;
+  
+  /* 次色调 - 浅绿色 */
+  --admin-secondary: #c0faa0;
+  --admin-secondary-light: #d4fcc4;
+  --admin-secondary-dark: #a8f47c;
+  
+  /* 白色系 */
+  --admin-white: #ffffff;
+  --admin-white-soft: #fafafa;
+  --admin-white-muted: #f5f5f5;
+  
+  /* 搭配色调 */
+  --admin-accent-1: #8b5cf6; /* 紫色渐变 */
+  --admin-accent-2: #06d6a0; /* 青绿色 */
+  --admin-accent-3: #ffd23f; /* 金黄色 */
+  --admin-accent-4: #ff6b6b; /* 珊瑚红 */
+  
+  /* 灰度色调 */
+  --admin-gray-50: #fafafa;
+  --admin-gray-100: #f4f4f5;
+  --admin-gray-200: #e4e4e7;
+  --admin-gray-300: #d4d4d8;
+  --admin-gray-400: #a1a1aa;
+  --admin-gray-500: #71717a;
+  --admin-gray-600: #52525b;
+  --admin-gray-700: #3f3f46;
+  --admin-gray-800: #27272a;
+  --admin-gray-900: #18181b;
+  
+  /* 功能色 */
+  --admin-success: #10b981;
+  --admin-warning: #f59e0b;
+  --admin-error: #ef4444;
+  --admin-info: #3b82f6;
+  
+  /* 阴影效果 */
+  --admin-shadow-sm: 0 1px 2px rgba(22, 19, 38, 0.05);
+  --admin-shadow-md: 0 4px 6px -1px rgba(22, 19, 38, 0.1), 0 2px 4px -1px rgba(22, 19, 38, 0.06);
+  --admin-shadow-lg: 0 10px 15px -3px rgba(22, 19, 38, 0.1), 0 4px 6px -2px rgba(22, 19, 38, 0.05);
+  --admin-shadow-xl: 0 20px 25px -5px rgba(22, 19, 38, 0.1), 0 10px 10px -5px rgba(22, 19, 38, 0.04);
+  
+  /* 渐变效果 */
+  --admin-gradient-primary: #000000;
+  --admin-gradient-secondary: #c0faa0;
+  --admin-gradient-accent: #000000;
+  --admin-gradient-warm: #c0faa0;
+  
+  /* 玻璃态效果 */
+  --admin-glass-bg: rgba(255, 255, 255, 0.8);
+  --admin-glass-bg-dark: rgba(22, 19, 38, 0.8);
+  --admin-glass-border: rgba(255, 255, 255, 0.2);
+  --admin-glass-blur: 16px;
+  
+  /* 过渡效果 */
+  --admin-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --admin-transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --admin-transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* 圆角 */
+  --admin-radius-sm: 6px;
+  --admin-radius-md: 8px;
+  --admin-radius-lg: 12px;
+  --admin-radius-xl: 16px;
+  --admin-radius-2xl: 20px;
+  
+  /* 间距 */
+  --admin-space-xs: 4px;
+  --admin-space-sm: 8px;
+  --admin-space-md: 16px;
+  --admin-space-lg: 24px;
+  --admin-space-xl: 32px;
+  --admin-space-2xl: 48px;
+}
+
+/* 后台管理布局样式 */
+.admin-layout {
+  background: #000000;
+  min-height: 100vh;
+}
+
+/* 顶部导航栏 */
+.admin-header {
+  background: var(--admin-glass-bg);
+  backdrop-filter: blur(var(--admin-glass-blur));
+  -webkit-backdrop-filter: blur(var(--admin-glass-blur));
+  border-bottom: 1px solid var(--admin-glass-border);
+  box-shadow: var(--admin-shadow-md);
+  position: relative;
+  z-index: 1000;
+}
+
+.admin-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--admin-gradient-secondary);
+  opacity: 0.1;
+  z-index: -1;
+}
+
+.admin-header h1 {
+  background: var(--admin-gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: -0.5px;
+}
+
+.admin-header .header-right span {
+  color: var(--admin-primary);
+  font-weight: 500;
+}
+
+/* 侧边栏样式 */
+.admin-sidebar {
+  background: var(--admin-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--admin-gradient-primary);
+  opacity: 0.9;
+  z-index: 1;
+}
+
+.admin-menu {
+  position: relative;
+  z-index: 2;
+  background: transparent !important;
+}
+
+/* 菜单项样式 */
+.admin-menu .el-menu-item {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(192, 250, 160, 0.1) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  transition: all var(--admin-transition-normal) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-menu .el-menu-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--admin-gradient-secondary);
+  opacity: 0;
+  transition: all var(--admin-transition-normal);
+  z-index: -1;
+}
+
+.admin-menu .el-menu-item:hover {
+  background: rgba(192, 250, 160, 0.1) !important;
+  color: var(--admin-secondary) !important;
+  transform: translateX(8px);
+}
+
+.admin-menu .el-menu-item:hover::before {
+  left: 0;
+  opacity: 0.1;
+}
+
+.admin-menu .el-menu-item.is-active {
+  background: var(--admin-secondary) !important;
+  color: var(--admin-primary) !important;
+  font-weight: 600;
+  border-radius: 0 var(--admin-radius-lg) var(--admin-radius-lg) 0;
+  margin-right: var(--admin-space-sm);
+  box-shadow: var(--admin-shadow-md);
+}
+
+.admin-menu .el-menu-item.is-active .el-icon {
+  color: var(--admin-primary) !important;
+}
+
+.admin-menu .el-menu-item .el-icon {
+  color: inherit !important;
+  font-size: 18px !important;
+  transition: all var(--admin-transition-normal);
+}
+
+.admin-menu .el-menu-item:hover .el-icon {
+  transform: scale(1.1);
+}
+
+/* 主内容区域 */
+.admin-main {
+  background: var(--admin-white-soft);
+  position: relative;
+}
+
+.admin-main::before {
+  content: '';
+  position: fixed;
+  top: 80px;
+  left: 240px;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(192, 250, 160, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(6, 214, 160, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 移动端背景适配 */
+@media (max-width: 768px) {
+  .admin-main::before {
+    left: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-main::before {
+    top: 60px;
+    left: 60px;
+  }
+}
+
+.admin-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* 卡片样式 */
+.admin-card {
+  background: var(--admin-glass-bg);
+  backdrop-filter: blur(var(--admin-glass-blur));
+  -webkit-backdrop-filter: blur(var(--admin-glass-blur));
+  border: 1px solid var(--admin-glass-border);
+  border-radius: var(--admin-radius-lg);
+  box-shadow: var(--admin-shadow-lg);
+  transition: all var(--admin-transition-normal);
+  overflow: hidden;
+  position: relative;
+}
+
+.admin-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--admin-gradient-secondary);
+  z-index: 1;
+}
+
+.admin-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--admin-shadow-xl);
+}
+
+/* 按钮样式 */
+.admin-btn-primary {
+  background: var(--admin-gradient-accent) !important;
+  border: none !important;
+  color: var(--admin-white) !important;
+  border-radius: var(--admin-radius-md) !important;
+  font-weight: 500 !important;
+  transition: all var(--admin-transition-normal) !important;
+  box-shadow: var(--admin-shadow-md) !important;
+}
+
+.admin-btn-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--admin-shadow-lg) !important;
+}
+
+.admin-btn-secondary {
+  background: var(--admin-gradient-secondary) !important;
+  border: none !important;
+  color: var(--admin-primary) !important;
+  border-radius: var(--admin-radius-md) !important;
+  font-weight: 500 !important;
+  transition: all var(--admin-transition-normal) !important;
+  box-shadow: var(--admin-shadow-md) !important;
+}
+
+.admin-btn-secondary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--admin-shadow-lg) !important;
+}
+
+/* 表格样式 */
+.admin-table {
+  background: var(--admin-white) !important;
+  border-radius: var(--admin-radius-lg) !important;
+  overflow: hidden !important;
+  box-shadow: var(--admin-shadow-md) !important;
+}
+
+.admin-table .el-table__header {
+  background: var(--admin-gradient-secondary) !important;
+}
+
+.admin-table .el-table__header th {
+  background: transparent !important;
+  color: var(--admin-primary) !important;
+  font-weight: 600 !important;
+  border-bottom: none !important;
+}
+
+.admin-table .el-table__body tr:hover {
+  background: rgba(192, 250, 160, 0.05) !important;
+}
+
+/* 表单样式 */
+.admin-form .el-input__wrapper {
+  border-radius: var(--admin-radius-md) !important;
+  border: 1px solid var(--admin-gray-300) !important;
+  transition: all var(--admin-transition-normal) !important;
+}
+
+.admin-form .el-input__wrapper:hover {
+  border-color: var(--admin-secondary) !important;
+}
+
+.admin-form .el-input__wrapper.is-focus {
+  border-color: var(--admin-secondary) !important;
+  box-shadow: 0 0 0 2px rgba(192, 250, 160, 0.2) !important;
+}
+
+/* 分页样式 */
+.admin-pagination .el-pagination__total,
+.admin-pagination .el-pagination__jump {
+  color: var(--admin-primary) !important;
+}
+
+.admin-pagination .el-pager li {
+  background: var(--admin-white) !important;
+  border: 1px solid var(--admin-gray-300) !important;
+  border-radius: var(--admin-radius-sm) !important;
+  margin: 0 2px !important;
+  transition: all var(--admin-transition-normal) !important;
+}
+
+.admin-pagination .el-pager li:hover {
+  background: var(--admin-secondary) !important;
+  color: var(--admin-primary) !important;
+}
+
+.admin-pagination .el-pager li.is-active {
+  background: var(--admin-gradient-accent) !important;
+  color: var(--admin-white) !important;
+  border-color: transparent !important;
+}
+
+/* 标签样式 */
+.admin-tag {
+  border-radius: var(--admin-radius-md) !important;
+  font-weight: 500 !important;
+  padding: 4px 12px !important;
+}
+
+.admin-tag.el-tag--success {
+  background: rgba(16, 185, 129, 0.1) !important;
+  color: var(--admin-success) !important;
+  border-color: var(--admin-success) !important;
+}
+
+.admin-tag.el-tag--warning {
+  background: rgba(245, 158, 11, 0.1) !important;
+  color: var(--admin-warning) !important;
+  border-color: var(--admin-warning) !important;
+}
+
+.admin-tag.el-tag--danger {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: var(--admin-error) !important;
+  border-color: var(--admin-error) !important;
+}
+
+/* 对话框样式 */
+.admin-dialog .el-dialog {
+  border-radius: var(--admin-radius-xl) !important;
+  background: var(--admin-glass-bg) !important;
+  backdrop-filter: blur(var(--admin-glass-blur)) !important;
+  -webkit-backdrop-filter: blur(var(--admin-glass-blur)) !important;
+  border: 1px solid var(--admin-glass-border) !important;
+  box-shadow: var(--admin-shadow-xl) !important;
+}
+
+.admin-dialog .el-dialog__header {
+  background: var(--admin-gradient-secondary) !important;
+  color: var(--admin-primary) !important;
+  border-radius: var(--admin-radius-xl) var(--admin-radius-xl) 0 0 !important;
+  padding: var(--admin-space-lg) !important;
+}
+
+.admin-dialog .el-dialog__title {
+  font-weight: 600 !important;
+  font-size: 18px !important;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .admin-header h1 {
+    font-size: 18px;
+  }
+  
+  .admin-menu .el-menu-item {
+    padding: 0 12px !important;
+    justify-content: center !important;
+  }
+  
+  .admin-menu .el-menu-item span {
+    display: none !important;
+  }
+  
+  .admin-content {
+    padding: var(--admin-space-md);
+  }
+}
+
+/* 动画效果 */
+@keyframes admin-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes admin-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.admin-fade-in {
+  animation: admin-fade-in 0.6s ease-out;
+}
+
+.admin-slide-in {
+  animation: admin-slide-in 0.6s ease-out;
+}
+
+/* 滚动条样式 */
+.admin-layout ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.admin-layout ::-webkit-scrollbar-track {
+  background: rgba(192, 250, 160, 0.1);
+  border-radius: var(--admin-radius-sm);
+}
+
+.admin-layout ::-webkit-scrollbar-thumb {
+  background: var(--admin-gradient-secondary);
+  border-radius: var(--admin-radius-sm);
+  transition: all var(--admin-transition-normal);
+}
+
+.admin-layout ::-webkit-scrollbar-thumb:hover {
+  background: var(--admin-secondary-dark);
+}
