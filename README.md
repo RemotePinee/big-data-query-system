@@ -179,13 +179,13 @@ VITE_APP_ENV=development
 
 如果你遇到任何问题，请：
 
-1. 查看 [Issues](https://github.com/your-username/big-data-query-system/issues) 页面
+1. 查看 [Issues](https://github.com/RemotePinee/big-data-query-system/issues) 页面
 2. 创建新的 Issue 描述你的问题
-3. 或者发送邮件到：support@example.com
+3. 或者发送邮件到：614807355@qq.com
 
 ## 📊 项目状态
 
-![GitHub stars](https://img.shields.io/github/stars/your-username/big-data-query-system)
-![GitHub forks](https://img.shields.io/github/forks/your-username/big-data-query-system)
-![GitHub issues](https://img.shields.io/github/issues/your-username/big-data-query-system)
-![GitHub license](https://img.shields.io/github/license/your-username/big-data-query-system)
+![GitHub stars](https://img.shields.io/github/stars/RemotePinee/big-data-query-system)
+![GitHub forks](https://img.shields.io/github/forks/RemotePinee/big-data-query-system)
+![GitHub issues](https://img.shields.io/github/issues/RemotePinee/big-data-query-system)
+![GitHub license](https://img.shields.io/github/license/RemotePinee/big-data-query-system)
