@@ -5,11 +5,13 @@
 ## ✨ 特性
 
 - 🚀 高性能数据查询引擎
-- 📊 实时数据可视化
+- 📊 实时数据可视化和趋势分析
 - 🔐 完整的用户权限管理
 - 💳 集成支付系统
 - 🛡️ 企业级安全防护
 - 📱 响应式设计，支持移动端
+- 📈 智能仪表板，实时统计数据
+- 🔄 自动趋势计算和对比分析
 
 ## 🏗️ 技术栈
 
@@ -19,12 +21,16 @@
 - MySQL 数据库
 - Redis 缓存
 - JWT 身份认证
+- RESTful API 设计
+- 数据统计和趋势分析
 
 ### 前端
-- Vue.js 3
+- Vue.js 3 + Composition API
 - TypeScript
 - Vite 构建工具
 - Element Plus UI 组件库
+- Vue Router 4 路由管理
+- Pinia 状态管理
 
 ## 📁 项目结构
 
@@ -32,11 +38,25 @@
 production-package/
 ├── backend/          # 后端代码
 │   ├── src/         # 源代码
+│   │   ├── controllers/  # 控制器层
+│   │   ├── models/      # 数据模型
+│   │   ├── routes/      # 路由配置
+│   │   ├── services/    # 业务逻辑层
+│   │   ├── middlewares/ # 中间件
+│   │   ├── config/      # 配置文件
+│   │   └── utils/       # 工具函数
 │   ├── sql/         # 数据库初始化文件
 │   ├── package.json # 依赖配置
 │   └── .env.example # 环境变量示例
 ├── frontend/        # 前端代码
 │   ├── src/         # 源代码
+│   │   ├── views/       # 页面组件
+│   │   ├── components/  # 通用组件
+│   │   ├── layouts/     # 布局组件
+│   │   ├── stores/      # 状态管理
+│   │   ├── router/      # 路由配置
+│   │   ├── api/         # API接口
+│   │   └── utils/       # 工具函数
 │   ├── public/      # 静态资源
 │   ├── package.json # 依赖配置
 │   └── .env.example # 环境变量示例
@@ -55,8 +75,8 @@ production-package/
 
 1. **克隆项目**
    ```bash
-   git clone https://github.com/your-username/big-data-query-system.git
-   cd big-data-query-system
+   git clone https://github.com/RemotePinee/big-data-query-system.git
+   cd big-data-query-system/production-package
    ```
 
 2. **后端设置**
@@ -89,8 +109,9 @@ production-package/
    ```
 
 4. **访问应用**
-   - 前端：http://localhost:5173
+   - 前端：http://localhost:5176
    - 后端API：http://localhost:3000
+   - 管理后台：http://localhost:5176/admin
 
 ## 🔧 配置说明
 
@@ -119,6 +140,21 @@ VITE_API_BASE_URL=http://localhost:3000/api
 VITE_APP_TITLE=大数据查询系统
 VITE_APP_ENV=development
 ```
+
+## 🎯 主要功能
+
+### 用户端功能
+- 🔍 数据查询：支持复杂条件查询和筛选
+- 📊 数据可视化：图表展示查询结果
+- 💰 付费查询：支持付费获取高级数据
+- 👤 用户管理：注册、登录、个人信息管理
+
+### 管理端功能
+- 📈 数据统计仪表板：实时展示系统关键指标
+- 👥 用户管理：查看和管理所有用户
+- 📋 订单管理：查看和处理所有订单
+- 💹 趋势分析：自动计算和展示数据趋势
+- 📊 图表分析：用户增长、订单量、收入等可视化分析
 
 ## 📦 生产环境部署
 
