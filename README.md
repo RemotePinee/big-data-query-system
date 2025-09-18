@@ -115,31 +115,50 @@ production-package/
 
 ## 🔧 配置说明
 
-### 后端环境变量
+### 后端环境变量（重要）
+
+后端需要配置数据库、JWT、支付等关键信息：
 
 ```env
 # 服务器配置
 PORT=3000
 NODE_ENV=development
 
-# 数据库配置
+# 域名配置（生产环境需要修改）
+FRONTEND_URL=http://localhost:5176
+API_BASE_URL=http://localhost:3000/api
+
+# 数据库配置（必须配置）
 DB_HOST=localhost
 DB_USER=your_db_user
 DB_PASSWORD=your_db_password
 DB_NAME=your_db_name
 
-# JWT配置
-JWT_SECRET=your_jwt_secret_key
+# JWT配置（必须配置）
+JWT_SECRET=your_jwt_secret_key_here
 JWT_EXPIRES_IN=7d
+
+# Redis配置
+REDIS_HOST=localhost
+REDIS_PORT=6379
+REDIS_PASSWORD=
+
+# 支付配置（可选）
+# 微信支付、支付宝、易支付等配置...
 ```
 
-### 前端环境变量
+### 前端环境变量（可选）
+
+前端配置相对简单，通常使用默认值即可：
 
 ```env
+# 开发环境配置示例
 VITE_API_BASE_URL=http://localhost:3000/api
 VITE_APP_TITLE=大数据查询系统
 VITE_APP_ENV=development
 ```
+
+> **注意**：前端环境变量通常不需要修改，系统会自动使用合适的默认值。主要配置工作集中在后端。
 
 ## 🎯 主要功能
 
