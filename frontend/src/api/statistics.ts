@@ -7,6 +7,12 @@ export interface DashboardStats {
   totalRevenue: number;
   todayOrders: number;
   todayRevenue: number;
+  trends?: {
+    users: { percentage: number; direction: 'up' | 'down' | 'stable' };
+    orders: { percentage: number; direction: 'up' | 'down' | 'stable' };
+    revenue: { percentage: number; direction: 'up' | 'down' | 'stable' };
+    todayOrders: { percentage: number; direction: 'up' | 'down' | 'stable' };
+  };
 }
 
 export interface ChartData {

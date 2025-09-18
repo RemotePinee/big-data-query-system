@@ -11,7 +11,10 @@
           <div class="stat-number">{{ statistics.totalUsers }}</div>
           <div class="stat-label">总用户数</div>
           <div class="stat-trend">
-            <span class="trend-up">↗ +12%</span>
+            <span :class="`trend-${statistics.trends?.users?.direction || 'stable'}`">
+              {{ statistics.trends?.users?.direction === 'up' ? '↗' : statistics.trends?.users?.direction === 'down' ? '↘' : '→' }}
+              {{ statistics.trends?.users?.direction === 'stable' ? '0' : statistics.trends?.users?.percentage }}%
+            </span>
           </div>
         </div>
       </div>
@@ -22,7 +25,10 @@
           <div class="stat-number">{{ statistics.totalOrders }}</div>
           <div class="stat-label">总订单数</div>
           <div class="stat-trend">
-            <span class="trend-up">↗ +8%</span>
+            <span :class="`trend-${statistics.trends?.orders?.direction || 'stable'}`">
+              {{ statistics.trends?.orders?.direction === 'up' ? '↗' : statistics.trends?.orders?.direction === 'down' ? '↘' : '→' }}
+              {{ statistics.trends?.orders?.direction === 'stable' ? '0' : statistics.trends?.orders?.percentage }}%
+            </span>
           </div>
         </div>
       </div>
@@ -33,7 +39,10 @@
           <div class="stat-number">{{ formatAmount(statistics.totalRevenue) }}</div>
           <div class="stat-label">总收入(元)</div>
           <div class="stat-trend">
-            <span class="trend-up">↗ +15%</span>
+            <span :class="`trend-${statistics.trends?.revenue?.direction || 'stable'}`">
+              {{ statistics.trends?.revenue?.direction === 'up' ? '↗' : statistics.trends?.revenue?.direction === 'down' ? '↘' : '→' }}
+              {{ statistics.trends?.revenue?.direction === 'stable' ? '0' : statistics.trends?.revenue?.percentage }}%
+            </span>
           </div>
         </div>
       </div>
@@ -44,7 +53,10 @@
           <div class="stat-number">{{ statistics.todayOrders }}</div>
           <div class="stat-label">今日订单</div>
           <div class="stat-trend">
-            <span class="trend-up">↗ +5%</span>
+            <span :class="`trend-${statistics.trends?.todayOrders?.direction || 'stable'}`">
+              {{ statistics.trends?.todayOrders?.direction === 'up' ? '↗' : statistics.trends?.todayOrders?.direction === 'down' ? '↘' : '→' }}
+              {{ statistics.trends?.todayOrders?.direction === 'stable' ? '0' : statistics.trends?.todayOrders?.percentage }}%
+            </span>
           </div>
         </div>
       </div>
@@ -241,7 +253,13 @@ const statistics = reactive<DashboardStats>({
   totalOrders: 0,
   totalRevenue: 0,
   todayOrders: 0,
-  todayRevenue: 0
+  todayRevenue: 0,
+  trends: {
+    users: { percentage: 0, direction: 'stable' },
+    orders: { percentage: 0, direction: 'stable' },
+    revenue: { percentage: 0, direction: 'stable' },
+    todayOrders: { percentage: 0, direction: 'stable' }
+  }
 });
 
 // 最近订单
@@ -773,7 +791,8 @@ onUnmounted(() => {
 }
 
 .stat-trend .trend-up,
-.stat-trend .trend-down {
+.stat-trend .trend-down,
+.stat-trend .trend-stable {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -788,6 +807,11 @@ onUnmounted(() => {
 .stat-trend .trend-down {
   background: rgba(239, 68, 68, 0.1);
   color: var(--admin-danger);
+}
+
+.stat-trend .trend-stable {
+  background: rgba(156, 163, 175, 0.1);
+  color: var(--admin-text-secondary);
 }
 
 .stat-icon {

@@ -149,21 +149,93 @@ export class StatisticsController {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
       const todayOrders = allOrders.filter(order => {
+        if (!order.createdAt) return false;
         const orderDate = new Date(order.createdAt);
         orderDate.setHours(0, 0, 0, 0);
         return orderDate.getTime() === today.getTime();
       });
+
+      // 计算昨日数据用于趋势对比
+      const yesterday = new Date(today);
+      yesterday.setDate(yesterday.getDate() - 1);
+      const yesterdayOrders = allOrders.filter(order => {
+        if (!order.createdAt) return false;
+        const orderDate = new Date(order.createdAt);
+        orderDate.setHours(0, 0, 0, 0);
+        return orderDate.getTime() === yesterday.getTime();
+      });
+
+      // 计算上周同期数据用于趋势对比
+      const lastWeek = new Date(today);
+      lastWeek.setDate(lastWeek.getDate() - 7);
       
-      // 计算总收入（已支付订单，保持原始分单位，前端会转换）
-      const paidOrders = allOrders.filter(order => order.status === 'paid');
+      // 计算本周新增用户（过去7天）
+      const thisWeekUsers = allUsers.filter(user => {
+        if (!user.createdAt) return false;
+        const userDate = new Date(user.createdAt);
+        return userDate.getTime() >= lastWeek.getTime();
+      });
+
+      // 计算上周新增用户（7-14天前）
+      const twoWeeksAgo = new Date(lastWeek);
+      twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 7);
+      const lastWeekNewUsers = allUsers.filter(user => {
+        if (!user.createdAt) return false;
+        const userDate = new Date(user.createdAt);
+        return userDate.getTime() >= twoWeeksAgo.getTime() && userDate.getTime() < lastWeek.getTime();
+      });
+
+      // 计算本周新增订单（过去7天）
+      const thisWeekOrders = allOrders.filter(order => {
+        if (!order.createdAt) return false;
+        const orderDate = new Date(order.createdAt);
+        return orderDate.getTime() >= lastWeek.getTime();
+      });
+
+      // 计算上周新增订单（7-14天前）
+      const lastWeekNewOrders = allOrders.filter(order => {
+        if (!order.createdAt) return false;
+        const orderDate = new Date(order.createdAt);
+        return orderDate.getTime() >= twoWeeksAgo.getTime() && orderDate.getTime() < lastWeek.getTime();
+      });
+
+      // 计算本周收入（过去7天的已支付订单）
+      const thisWeekPaidOrders = thisWeekOrders.filter(order => order.status === 'paid' || order.status === 'completed');
+      const thisWeekRevenue = thisWeekPaidOrders.reduce((sum, order) => sum + parseFloat(String(order.amount || '0')), 0);
+
+      // 计算上周收入（7-14天前的已支付订单）
+      const lastWeekPaidOrders = lastWeekNewOrders.filter(order => order.status === 'paid' || order.status === 'completed');
+      const lastWeekRevenue = lastWeekPaidOrders.reduce((sum, order) => sum + parseFloat(String(order.amount || '0')), 0);
+      
+      // 计算总收入（已支付订单：包括paid和completed状态）
+      const paidOrders = allOrders.filter(order => order.status === 'paid' || order.status === 'completed');
+      
+      console.log('所有订单状态统计:', {
+        total: allOrders.length,
+        pending: allOrders.filter(o => o.status === 'pending').length,
+        paid: allOrders.filter(o => o.status === 'paid').length,
+        processing: allOrders.filter(o => o.status === 'processing').length,
+        completed: allOrders.filter(o => o.status === 'completed').length,
+        failed: allOrders.filter(o => o.status === 'failed').length,
+        cancelled: allOrders.filter(o => o.status === 'cancelled').length
+      });
+      
+      console.log('已支付订单样本:', paidOrders.slice(0, 3).map(order => ({
+        id: order.id,
+        orderNo: order.orderNo,
+        amount: order.amount,
+        status: order.status,
+        amountType: typeof order.amount
+      })));
       
       const totalRevenue = paidOrders.reduce((sum, order) => {
         const amount = parseFloat(String(order.amount || '0'));
+        console.log(`订单 ${order.orderNo}: amount=${order.amount}, parsed=${amount}`);
         return sum + amount;
       }, 0);
       
-      // 计算今日收入（保持原始分单位，前端会转换）
-      const todayPaidOrders = todayOrders.filter(order => order.status === 'paid');
+      // 计算今日收入（包括paid和completed状态）
+      const todayPaidOrders = todayOrders.filter(order => order.status === 'paid' || order.status === 'completed');
       const todayRevenue = todayPaidOrders.reduce((sum, order) => sum + parseFloat(String(order.amount || '0')), 0);
       
       console.log('统计数据:', {
@@ -171,8 +243,33 @@ export class StatisticsController {
         totalOrders: allOrders.length,
         totalRevenue: totalRevenue,
         todayOrders: todayOrders.length,
-        todayRevenue: todayRevenue
+        todayRevenue: todayRevenue,
+        paidOrdersCount: paidOrders.length,
+        thisWeekUsers: thisWeekUsers.length,
+        lastWeekNewUsers: lastWeekNewUsers.length,
+        thisWeekOrders: thisWeekOrders.length,
+        lastWeekNewOrders: lastWeekNewOrders.length,
+        thisWeekRevenue: thisWeekRevenue,
+        lastWeekRevenue: lastWeekRevenue
       });
+
+      // 计算趋势数据
+      const calculateTrend = (current: number, previous: number): { percentage: number, direction: 'up' | 'down' | 'stable' } => {
+        if (previous === 0) {
+          return { percentage: current > 0 ? 100 : 0, direction: current > 0 ? 'up' : 'stable' };
+        }
+        const percentage = Math.round(((current - previous) / previous) * 100);
+        return {
+          percentage: Math.abs(percentage),
+          direction: percentage > 0 ? 'up' : percentage < 0 ? 'down' : 'stable'
+        };
+      };
+
+      // 计算各项趋势
+      const userTrend = calculateTrend(thisWeekUsers.length, lastWeekNewUsers.length);
+      const orderTrend = calculateTrend(thisWeekOrders.length, lastWeekNewOrders.length);
+      const revenueTrend = calculateTrend(thisWeekRevenue, lastWeekRevenue);
+      const todayOrderTrend = calculateTrend(todayOrders.length, yesterdayOrders.length);
       
       res.json({
         code: 200,
@@ -182,7 +279,13 @@ export class StatisticsController {
           totalOrders: allOrders.length,
           totalRevenue: totalRevenue,
           todayOrders: todayOrders.length,
-          todayRevenue: todayRevenue
+          todayRevenue: todayRevenue,
+          trends: {
+            users: userTrend,
+            orders: orderTrend,
+            revenue: revenueTrend,
+            todayOrders: todayOrderTrend
+          }
         }
       });
     } catch (error) {
@@ -286,7 +389,7 @@ export class StatisticsController {
       
       const { type = 'week' } = req.query;
       const allOrders = await OrderModel.findAll();
-      const paidOrders = allOrders.filter(order => order.status === 'paid');
+      const paidOrders = allOrders.filter(order => order.status === 'paid' || order.status === 'completed');
       
       let chartData;
       
