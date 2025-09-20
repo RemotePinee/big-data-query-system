@@ -1,5 +1,6 @@
 import { pool } from '../config/database';
 import bcrypt from 'bcryptjs';
+import { logger } from '../utils/logger';
 
 export interface User {
   id?: number;
@@ -52,7 +53,7 @@ export class UserModel {
       
       return result.insertId;
     } catch (error) {
-      console.error('创建用户失败:', error);
+      logger.error('创建用户失败', { error: error instanceof Error ? error.message : String(error) });
       throw error;
     }
   }
@@ -69,7 +70,7 @@ export class UserModel {
       
       return rows.length > 0 ? rows[0] : null;
     } catch (error) {
-      console.error('查找用户失败:', error);
+      logger.error('查找用户失败', { error: error instanceof Error ? error.message : String(error) });
       throw error;
     }
   }
@@ -86,7 +87,7 @@ export class UserModel {
       
       return rows.length > 0 ? rows[0] : null;
     } catch (error) {
-      console.error('查找用户失败:', error);
+      logger.error('查找用户失败', { error: error instanceof Error ? error.message : String(error) });
       throw error;
     }
   }
@@ -103,7 +104,7 @@ export class UserModel {
       
       return rows.length > 0 ? rows[0] : null;
     } catch (error) {
-      console.error('查找用户失败:', error);
+      logger.error('查找用户失败', { error: error instanceof Error ? error.message : String(error) });
       throw error;
     }
   }
@@ -120,7 +121,7 @@ export class UserModel {
       
       return rows.length > 0 ? rows[0] : null;
     } catch (error) {
-      console.error('查找用户失败:', error);
+      logger.error('查找用户失败', { error: error instanceof Error ? error.message : String(error) });
       throw error;
     }
   }
@@ -166,7 +167,7 @@ export class UserModel {
       
       return result.affectedRows > 0;
     } catch (error) {
-      console.error('更新用户余额失败:', error);
+      logger.error('更新用户余额失败', { error: error instanceof Error ? error.message : String(error) });
       throw error;
     }
   }
@@ -286,7 +287,7 @@ export class UserModel {
       
       return result.affectedRows > 0;
     } catch (error) {
-      console.error('删除用户失败:', error);
+      logger.error('删除用户失败', { error: error instanceof Error ? error.message : String(error) });
       throw error;
     }
   }

@@ -3,6 +3,7 @@ import { User, UserModel } from '../models/user.model';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import { StringValue } from 'ms';
 import dotenv from 'dotenv';
+import { logger } from '../utils/logger';
 
 dotenv.config();
 
@@ -102,12 +103,12 @@ export class UserController {
   // 用户登录
   static async login(req: Request, res: Response) {
     try {
-      console.log('收到登录请求:', req.body);
+      logger.info('收到登录请求', { body: req.body });
       const { username, password } = req.body;
       
       // 验证必填字段
       if (!username || !password) {
-        console.log('登录失败: 缺少必填字段');
+        logger.warn('登录失败: 缺少必填字段');
         return res.status(400).json({
           code: 400,
           message: '用户名和密码为必填项'
@@ -186,6 +187,14 @@ export class UserController {
   // 获取用户信息
   static async getUserInfo(req: Request, res: Response) {
     try {
+      // 检查用户是否已认证
+      if (!(req as any).user) {
+        return res.status(401).json({
+          code: 401,
+          message: '用户未认证'
+        });
+      }
+      
       // 从请求中获取用户ID（通过auth中间件设置）
       const userId = (req as any).user.id;
       

@@ -66,7 +66,6 @@ export class EncryptionUtil {
         return encrypted;
       }
     } catch (error) {
-      console.error('AES加密失败:', error);
       throw new Error('数据加密失败');
     }
   }
@@ -130,7 +129,6 @@ export class EncryptionUtil {
         return decrypted;
       }
     } catch (error) {
-      console.error('AES解密失败:', error);
       throw new Error('数据解密失败');
     }
   }
@@ -162,7 +160,6 @@ export class EncryptionUtil {
       
       return params;
     } catch (error) {
-      console.error('生成动态参数失败:', error);
       return {};
     }
   }

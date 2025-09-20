@@ -10,6 +10,7 @@ import { initDatabase } from './utils/init-db';
 import { cleanAndInsertTestOrders } from './utils/clean-orders';
 import { SchedulerService } from './services/scheduler.service';
 import { autoQueryService } from './services/auto-query.service';
+import { logger, requestLogger } from './utils/logger';
 
 // 加载环境变量
 dotenv.config();
@@ -46,6 +47,9 @@ app.use('/api', limiter);
 
 // 压缩中间件
 app.use(compression());
+
+// 请求日志中间件
+app.use(requestLogger);
 
 // CORS配置 - 根据环境变量动态设置
 const allowedOrigins = process.env.NODE_ENV === 'production' 
@@ -110,6 +114,7 @@ import adminRoutes from './routes/admin.routes';
 import cleanupRoutes from './routes/cleanup.routes';
 import systemSettingsRoutes from './routes/systemSettings';
 import queryHistoryRoutes from './routes/query-history.routes';
+import healthRoutes from './routes/health.routes';
 
 // 注册路由
 app.use('/api/auth', userRoutes); // 认证路由 (包含login)
@@ -130,6 +135,9 @@ app.use('/api/admin/cleanup', cleanupRoutes);
 // 系统设置路由
 app.use('/api', systemSettingsRoutes);
 
+// 健康检查路由
+app.use('/api', healthRoutes);
+
 // 启动服务器
 const startServer = async () => {
   try {
@@ -149,13 +157,15 @@ const startServer = async () => {
     await autoQueryService.resumeIncompleteQueries();
     
     app.listen(port, () => {
-      console.log(`🚀 服务器启动成功！`);
-      console.log(`📍 服务地址: http://localhost:${port}`);
-      console.log(`📖 API文档: http://localhost:${port}/api`);
-      console.log(`✅ 所有服务已就绪！`);
+      logger.info('🚀 服务器启动成功！');
+      logger.info(`📍 服务地址: http://localhost:${port}`);
+      logger.info(`📖 API文档: http://localhost:${port}/api`);
+      logger.info('✅ 所有服务已就绪！');
     });
   } catch (error) {
-    console.error('服务器启动失败:', error);
+    logger.error('服务器启动失败', { 
+      error: error instanceof Error ? error.message : String(error) 
+    });
     process.exit(1);
   }
 };

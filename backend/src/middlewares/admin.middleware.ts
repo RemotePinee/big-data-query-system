@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { logger } from '../utils/logger';
 
 export interface AuthenticatedRequest extends Request {
   user?: {
@@ -28,7 +29,9 @@ export const adminMiddleware = (req: AuthenticatedRequest, res: Response, next: 
 
     next();
   } catch (error) {
-    console.error('管理员权限验证失败:', error);
+    logger.error('管理员权限验证失败', { 
+      error: error instanceof Error ? error.message : String(error) 
+    });
     res.status(500).json({
       code: 500,
       message: '服务器内部错误'
